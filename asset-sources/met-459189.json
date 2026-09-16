@@ -1,0 +1,99 @@
+{
+  "objectID": 459189,
+  "isHighlight": true,
+  "accessionNumber": "1975.1.592",
+  "accessionYear": "1975",
+  "isPublicDomain": true,
+  "primaryImage": "https://images.metmuseum.org/CRDImages/rl/original/DP359010.jpg",
+  "primaryImageSmall": "https://images.metmuseum.org/CRDImages/rl/web-large/DP359010.jpg",
+  "additionalImages": [
+    "https://images.metmuseum.org/CRDImages/rl/original/DT736.jpg",
+    "https://images.metmuseum.org/CRDImages/rl/original/rl1975.1.592.R.jpg"
+  ],
+  "constituents": [
+    {
+      "constituentID": 161799,
+      "role": "Artist",
+      "name": "Henri-Edmond Cross (Henri-Edmond Delacroix)",
+      "constituentULAN_URL": "http://vocab.getty.edu/page/ulan/500014010",
+      "constituentWikidata_URL": "https://www.wikidata.org/wiki/Q555224",
+      "gender": ""
+    }
+  ],
+  "department": "Robert Lehman Collection",
+  "objectName": "Drawing",
+  "title": "Landscape with Stars",
+  "culture": "",
+  "period": "",
+  "dynasty": "",
+  "reign": "",
+  "portfolio": "",
+  "artistRole": "Artist",
+  "artistPrefix": "",
+  "artistDisplayName": "Henri-Edmond Cross (Henri-Edmond Delacroix)",
+  "artistDisplayBio": "French, Douai 1856–1910 Saint-Clair",
+  "artistSuffix": "",
+  "artistAlphaSort": "Cross, Henri-Edmond",
+  "artistNationality": "French",
+  "artistBeginDate": "1856",
+  "artistEndDate": "1910",
+  "artistGender": "",
+  "artistWikidata_URL": "https://www.wikidata.org/wiki/Q555224",
+  "artistULAN_URL": "http://vocab.getty.edu/page/ulan/500014010",
+  "objectDate": "ca. 1905–1908",
+  "objectBeginDate": 1902,
+  "objectEndDate": 1910,
+  "medium": "Watercolor on white wove paper",
+  "dimensions": "9 5/8 × 12 5/8 in. (24.4 × 32.1 cm)\r\nFramed: 18 × 24 in. (45.7 × 61 cm)",
+  "measurements": [
+    {
+      "elementName": "Overall",
+      "elementDescription": null,
+      "elementMeasurements": {
+        "Height": 24.4,
+        "Width": 32.1
+      }
+    },
+    {
+      "elementName": "Framed",
+      "elementDescription": null,
+      "elementMeasurements": {
+        "Height": 45.720093,
+        "Width": 60.96012
+      }
+    }
+  ],
+  "creditLine": "Robert Lehman Collection, 1975",
+  "geographyType": "",
+  "city": "",
+  "state": "",
+  "county": "",
+  "country": "",
+  "region": "",
+  "subregion": "",
+  "locale": "",
+  "locus": "",
+  "excavation": "",
+  "river": "",
+  "classification": "Drawings",
+  "rightsAndReproduction": "",
+  "linkResource": "",
+  "metadataDate": "2025-01-29T04:54:03.16Z",
+  "repository": "Metropolitan Museum of Art, New York, NY",
+  "objectURL": "https://www.metmuseum.org/art/collection/search/459189",
+  "tags": [
+    {
+      "term": "Stars",
+      "AAT_URL": "http://vocab.getty.edu/page/aat/300387654",
+      "Wikidata_URL": "https://www.wikidata.org/wiki/Q25962599"
+    },
+    {
+      "term": "Landscapes",
+      "AAT_URL": "http://vocab.getty.edu/page/aat/300132294",
+      "Wikidata_URL": "https://www.wikidata.org/wiki/Q191163"
+    }
+  ],
+  "objectWikidata_URL": "https://www.wikidata.org/wiki/Q20187805",
+  "isTimelineWork": false,
+  "GalleryNumber": ""
+}

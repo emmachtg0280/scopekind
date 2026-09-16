@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.wrangler/
+.dev.vars*
+.env*
+backups/
+lovable-source/
+.sites-runtime/
+original.html
+original-routes.js
+site.tar.gz

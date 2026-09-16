@@ -1,0 +1,16 @@
+{
+  "file": "src/pantry-tomatoes.jpg",
+  "author": "Nik (@helloimnik)",
+  "title": "Tomaten",
+  "source": "https://unsplash.com/photos/orange-fruits-on-white-surface-NEPPt7B64wY",
+  "download": "https://images.unsplash.com/photo-1522769822844-c2dba5b83c66?auto=format&fit=crop&fm=jpg&q=85&w=1200",
+  "published": "2018-04-03",
+  "camera": "Nikon D3000 (source page)",
+  "license": "Unsplash License",
+  "licenseUrl": "https://unsplash.com/license",
+  "commercialUseSource": "https://help.unsplash.com/en/articles/2612315-can-i-use-unsplash-images-for-personal-or-commercial-projects",
+  "verified": "2026-09-13",
+  "provenanceEvidence": "Source page attributes the photograph to Nik, supplies a publication date in 2018 and camera model. Not inferred from appearance alone.",
+  "treatment": "Standard resized JPEG from the source image service; CSS crops only; no generative edits.",
+  "sha256": "5a2e0ed2167bfa4b7ff047892a35915bbb5f1fc7ba5446554e086563114f1c8b"
+}

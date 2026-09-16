@@ -1,0 +1,86 @@
+{
+  "objectID": 459094,
+  "isHighlight": false,
+  "accessionNumber": "1975.1.163",
+  "accessionYear": "1975",
+  "isPublicDomain": true,
+  "primaryImage": "https://images.metmuseum.org/CRDImages/rl/original/DT3110.jpg",
+  "primaryImageSmall": "https://images.metmuseum.org/CRDImages/rl/web-large/DT3110.jpg",
+  "additionalImages": [
+    "https://images.metmuseum.org/CRDImages/rl/original/ep1975.1.163.bw.R.jpg",
+    "https://images.metmuseum.org/CRDImages/rl/original/2514.jpg"
+  ],
+  "constituents": [
+    {
+      "constituentID": 161799,
+      "role": "Artist",
+      "name": "Henri-Edmond Cross (Henri-Edmond Delacroix)",
+      "constituentULAN_URL": "http://vocab.getty.edu/page/ulan/500014010",
+      "constituentWikidata_URL": "https://www.wikidata.org/wiki/Q555224",
+      "gender": ""
+    }
+  ],
+  "department": "Robert Lehman Collection",
+  "objectName": "Painting",
+  "title": "Valley with Fir (Shade on the Mountain)",
+  "culture": "",
+  "period": "",
+  "dynasty": "",
+  "reign": "",
+  "portfolio": "",
+  "artistRole": "Artist",
+  "artistPrefix": "",
+  "artistDisplayName": "Henri-Edmond Cross (Henri-Edmond Delacroix)",
+  "artistDisplayBio": "French, Douai 1856–1910 Saint-Clair",
+  "artistSuffix": "",
+  "artistAlphaSort": "Cross, Henri-Edmond",
+  "artistNationality": "French",
+  "artistBeginDate": "1856",
+  "artistEndDate": "1910",
+  "artistGender": "",
+  "artistWikidata_URL": "https://www.wikidata.org/wiki/Q555224",
+  "artistULAN_URL": "http://vocab.getty.edu/page/ulan/500014010",
+  "objectDate": "1909",
+  "objectBeginDate": 1909,
+  "objectEndDate": 1909,
+  "medium": "Oil on canvas",
+  "dimensions": "29 x 35 1/2 in. (73.7 x 90.2 cm)",
+  "measurements": [
+    {
+      "elementName": "Overall",
+      "elementDescription": null,
+      "elementMeasurements": {
+        "Height": 73.7,
+        "Width": 90.2
+      }
+    }
+  ],
+  "creditLine": "Robert Lehman Collection, 1975",
+  "geographyType": "",
+  "city": "",
+  "state": "",
+  "county": "",
+  "country": "",
+  "region": "",
+  "subregion": "",
+  "locale": "",
+  "locus": "",
+  "excavation": "",
+  "river": "",
+  "classification": "Paintings",
+  "rightsAndReproduction": "",
+  "linkResource": "",
+  "metadataDate": "2026-05-21T04:56:54.46Z",
+  "repository": "Metropolitan Museum of Art, New York, NY",
+  "objectURL": "https://www.metmuseum.org/art/collection/search/459094",
+  "tags": [
+    {
+      "term": "Landscapes",
+      "AAT_URL": "http://vocab.getty.edu/page/aat/300132294",
+      "Wikidata_URL": "https://www.wikidata.org/wiki/Q191163"
+    }
+  ],
+  "objectWikidata_URL": "https://www.wikidata.org/wiki/Q20181510",
+  "isTimelineWork": false,
+  "GalleryNumber": "962"
+}

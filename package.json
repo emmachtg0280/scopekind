@@ -1,0 +1,18 @@
+{
+  "name": "scopekind",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "node scripts/build.mjs",
+    "lint": "node --check src/app.js && node --check src/worker.js && node --check scripts/dev.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "preview:cloudflare": "wrangler dev",
+    "deploy:check": "node scripts/build.mjs && wrangler deploy --dry-run",
+    "deploy": "node scripts/build.mjs && wrangler deploy"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.6",
+    "wrangler": "^4.131.0"
+  }
+}

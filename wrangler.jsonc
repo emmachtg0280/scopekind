@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "scopekind",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-09-10",
+  "workers_dev": true,
+  "assets": {
+    "directory": "./dist/client",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"],
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "scopekind-pilot",
+      "database_id": "86fa1970-17d0-4793-9ca8-fc1e2c4cf044",
+    },
+  ],
+}

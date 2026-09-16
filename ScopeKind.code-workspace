@@ -1,0 +1,14 @@
+{
+  "folders": [{ "path": "." }],
+  "settings": {
+    "files.exclude": {
+      "**/.sites-runtime": true,
+      "**/.wrangler": true
+    },
+    "search.exclude": {
+      "**/backups": true,
+      "**/dist": true,
+      "**/lovable-source": true
+    }
+  }
+}

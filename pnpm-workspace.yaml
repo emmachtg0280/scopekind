@@ -1,0 +1,12 @@
+allowBuilds:
+  esbuild: true
+  workerd: true
+supportedArchitectures:
+  os:
+    - current
+  cpu:
+    - current
+    - x64
+minimumReleaseAgeExclude:
+  - miniflare@5.20260910.0-alpha
+  - wrangler@4.131.0
