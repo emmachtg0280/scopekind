@@ -55,7 +55,15 @@ Les anciens fichiers importés sont conservés dans `backups/`, exclus de Git et
 
 https://scopekind.emmachataigner.workers.dev
 
-Le site et le formulaire D1 ont été vérifiés en production. Le dépôt Git local ne possède pas encore de dépôt distant configuré.
+Le site et le formulaire D1 ont été vérifiés en production. Le dépôt privé est disponible sur https://github.com/emmachtg0280/scopekind et relié au dossier local via `origin`.
+
+## Ouvrir dans Visual Studio Code
+
+Sur cet ordinateur, double-cliquer sur `Ouvrir-ScopeKind.cmd`. Il ouvre `ScopeKind.code-workspace` avec la version portable officielle de VS Code téléchargée dans `.sites-runtime/vscode` (exclue de Git). Sur un autre ordinateur, installer VS Code, cloner le dépôt puis ouvrir ce fichier workspace.
+
+Les fichiers source se trouvent dans `src/`. Le dépôt contient le code et les migrations, mais aucune donnée d'inscription, aucun secret Cloudflare, ni l'éditeur lui-même. L'envoi sur GitHub ne déclenche pas de déploiement automatique : le site reste hébergé par le Worker Cloudflare existant.
+
+La version portable ne se met pas à jour automatiquement : voir la [documentation officielle VS Code](https://code.visualstudio.com/docs/setup/portable).
 
 ## Refonte de septembre 2026
 
