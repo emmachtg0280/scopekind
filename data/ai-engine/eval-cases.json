@@ -1,0 +1,57 @@
+[
+  {
+    "id": "vague-premium",
+    "expected": "clarification_needed",
+    "input": {
+      "scope": { "deliverables": [{ "id": "scope-logo", "text": "One primary logo and two revision rounds" }], "exclusions": [] },
+      "decisions": [],
+      "request": { "id": "req-1", "text": "Can you make it more premium?" }
+    }
+  },
+  {
+    "id": "within-logo-revision",
+    "expected": "within_scope",
+    "input": {
+      "scope": { "deliverables": [{ "id": "scope-logo", "text": "Primary logo revision with adjusted typography" }], "exclusions": [] },
+      "decisions": [],
+      "request": { "id": "req-2", "text": "Please adjust the typography in the primary logo revision." }
+    }
+  },
+  {
+    "id": "excluded-social-kit",
+    "expected": "potential_change",
+    "input": {
+      "scope": { "deliverables": [{ "id": "scope-brand", "text": "Brand identity and logo files" }], "exclusions": [{ "id": "exclude-social", "text": "Social media templates and social media kit" }] },
+      "decisions": [],
+      "request": { "id": "req-3", "text": "Could you include social media templates and a social media kit too?" }
+    }
+  },
+  {
+    "id": "new-animation",
+    "expected": "potential_change",
+    "input": {
+      "scope": { "deliverables": [{ "id": "scope-logo", "text": "Static logo files" }], "exclusions": [] },
+      "decisions": [],
+      "request": { "id": "req-4", "text": "We would also like an animated version for the launch." }
+    }
+  },
+  {
+    "id": "approved-minimal-now-detailed",
+    "expected": "contradiction",
+    "input": {
+      "scope": { "deliverables": [{ "id": "scope-pack", "text": "One packaging direction" }], "exclusions": [] },
+      "decisions": [{ "id": "decision-7", "text": "Approved direction: minimal monochrome packaging" }],
+      "request": { "id": "req-5", "text": "Let's make the packaging highly detailed and colorful instead." }
+    }
+  },
+  {
+    "id": "unknown-deliverable",
+    "expected": "clarification_needed",
+    "input": {
+      "scope": { "deliverables": [{ "id": "scope-web", "text": "Homepage design" }], "exclusions": [] },
+      "decisions": [],
+      "request": { "id": "req-6", "text": "Please prepare the final materials for next week's conference booth." }
+    }
+  }
+]
+
