@@ -1,0 +1,171 @@
+name: ScopeKind public nightly QA
+on:
+  schedule:
+    - cron: '0 22 * * *'
+      timezone: America/Los_Angeles
+    - cron: '37 23 * * *'
+      timezone: America/Los_Angeles
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/public-nightly-qa.yml
+permissions:
+  contents: read
+concurrency:
+  group: scopekind-public-qa
+  cancel-in-progress: false
+jobs:
+  browser-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Prepare isolated browser checks
+        shell: bash
+        run: |
+          mkdir -p /tmp/scopekind-qa
+          cd /tmp/scopekind-qa
+          npm init -y
+          npm install --save-exact @playwright/test@1.55.1
+          npx playwright install --with-deps chromium
+          cat > playwright.config.cjs <<'CONFIG'
+          const {defineConfig}=require('@playwright/test');
+          module.exports=defineConfig({testDir:'.',testMatch:'public.spec.cjs',timeout:45000,workers:1,retries:1,reporter:[['list'],['html',{open:'never'}],['json',{outputFile:'results.json'}]],use:{baseURL:'https://scopekind.emmachataigner.workers.dev',browserName:'chromium',headless:false,viewport:{width:1440,height:960},serviceWorkers:'block',screenshot:'on',trace:'retain-on-failure',video:'retain-on-failure'}});
+          CONFIG
+          cat > public.spec.cjs <<'TESTS'
+          const {test,expect}=require('@playwright/test');
+          test.beforeEach(async({context,page})=>{
+            // Deny all writes. No signup or other mutation can reach production.
+            await context.route('**/*',route=>['GET','HEAD','OPTIONS'].includes(route.request().method())?route.continue():route.abort('blockedbyclient'));
+            const response=await page.goto('/');
+            expect(response.status()).toBe(200);
+            await expect(page.getByRole('heading',{level:1})).toBeVisible();
+          });
+          test('Homepage, images and desktop layout',async({page},info)=>{
+            await expect(page).toHaveTitle(/ScopeKind/i);
+            await page.locator('footer').scrollIntoViewIfNeeded();
+            await expect.poll(()=>page.evaluate(()=>[...document.images].filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.src))).toEqual([]);
+            expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+            await page.screenshot({path:info.outputPath('full-page.png'),fullPage:true});
+          });
+          test('Beta form validation, keyboard close and reopen',async({page},info)=>{
+            const trigger=page.getByRole('button',{name:'Request beta access ↗',exact:true}).first();
+            await trigger.click();
+            const dialog=page.getByRole('dialog');
+            await expect(dialog).toBeVisible();
+            const email=dialog.getByRole('textbox',{name:'Email address',exact:true});
+            await dialog.getByRole('button',{name:'Request beta access ↗',exact:true}).click();
+            expect(await email.evaluate(e=>e.validity.valueMissing)).toBe(true);
+            await email.fill('invalid-email');
+            expect(await email.evaluate(e=>e.validity.typeMismatch)).toBe(true);
+            await email.fill('scopekind-nightly-qa@example.com');
+            expect(await dialog.getByRole('checkbox').evaluate(e=>e.validity.valueMissing)).toBe(true);
+            await page.screenshot({path:info.outputPath('signup-validation.png')});
+            await page.keyboard.press('Escape');
+            await expect(dialog).toBeHidden();
+            await expect(trigger).toBeFocused();
+            await trigger.click();
+            await expect(dialog).toBeVisible();
+            await page.getByRole('button',{name:'Close signup',exact:true}).click();
+            await expect(dialog).toBeHidden();
+          });
+          test('Beta confirmation UI with simulated server response; backend NOT tested',async({page},info)=>{
+            let intercepted=0;
+            await page.route('**/api/pilot',async route=>{
+              expect(route.request().method()).toBe('POST');
+              intercepted++;
+              await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true})});
+            });
+            await page.getByRole('button',{name:'Request beta access ↗',exact:true}).first().click();
+            const dialog=page.getByRole('dialog');
+            await dialog.getByRole('textbox',{name:'Email address',exact:true}).fill('scopekind-nightly-qa@example.com');
+            await dialog.getByRole('checkbox').check();
+            await dialog.getByRole('button',{name:'Request beta access ↗',exact:true}).click();
+            await expect(dialog.getByRole('button',{name:'Skip for now',exact:true})).toBeVisible();
+            expect(intercepted).toBe(1);
+            await page.screenshot({path:info.outputPath('signup-simulated-success.png')});
+            await dialog.getByRole('button',{name:'Skip for now',exact:true}).click();
+            await expect(dialog).toBeHidden();
+          });
+          test('Demo edit, preparation, channel previews, decision history and reset',async({page},info)=>{
+            await page.getByRole('link',{name:'Try the example ↓',exact:true}).click();
+            await page.getByRole('button',{name:'Edit suggestion',exact:true}).click();
+            const question='Would you like to keep the approved direction? QA demo only.';
+            await page.getByRole('textbox',{name:'Suggested client check',exact:true}).fill(question);
+            await page.getByRole('button',{name:'Approve & prepare to send',exact:true}).click();
+            await expect(page.locator('#suggestion-notice')).toContainText('Draft prepared');
+            for(const name of ['Email','Instagram','WhatsApp']){
+              await page.getByRole('tab',{name,exact:true}).click();
+              await expect(page.getByRole('tabpanel',{name,exact:true})).toBeVisible();
+              await page.screenshot({path:info.outputPath('channel-'+name+'.png')});
+            }
+            await page.getByRole('button',{name:'Open client view →',exact:true}).click();
+            await expect(page.locator('#client-check-question')).toHaveText(question);
+            await page.getByRole('radio',{name:'Keep the approved direction',exact:true}).check();
+            await page.getByRole('button',{name:'Confirm example response →',exact:true}).click();
+            await expect(page.locator('#response-saved')).toBeVisible();
+            await expect(page.locator('#history-list')).toContainText(question);
+            await page.screenshot({path:info.outputPath('decision-history.png')});
+            await page.getByRole('button',{name:'Reset this example ↺',exact:true}).click();
+            await expect(page.locator('#history-list')).not.toContainText(question);
+          });
+          test('Comparison, project examples and FAQ navigation',async({page})=>{
+            for(const name of ['With ScopeKind','Without ScopeKind','Social campaign / Tempo','Packaging / Sola']){
+              await page.getByRole('tab',{name,exact:true}).click();
+              await expect(page.getByRole('tabpanel',{name,exact:true})).toBeVisible();
+            }
+            await page.getByRole('link',{name:'FAQ',exact:true}).click();
+            const summaries=page.locator('#faq summary');
+            expect(await summaries.count()).toBeGreaterThan(0);
+            for(const summary of await summaries.all()){
+              await summary.click();
+              expect(await summary.evaluate(e=>e.parentElement.open)).toBe(true);
+              await summary.click();
+            }
+          });
+          test('Mobile layout and signup at 390 px',async({page},info)=>{
+            await page.setViewportSize({width:390,height:844});
+            expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+            await page.screenshot({path:info.outputPath('mobile.png'),fullPage:true});
+            await page.getByRole('button',{name:'Request beta access ↗',exact:true}).first().click();
+            await expect(page.getByRole('dialog')).toBeVisible();
+            const box=await page.getByRole('dialog').boundingBox();
+            expect(box.x).toBeGreaterThanOrEqual(0);
+            expect(box.x+box.width).toBeLessThanOrEqual(391);
+          });
+          TESTS
+      - name: Run public site checks in desktop Chromium
+        working-directory: /tmp/scopekind-qa
+        run: xvfb-run --auto-servernum npx playwright test
+      - name: Record outcome and coverage limits
+        if: always()
+        shell: bash
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          mkdir -p /tmp/scopekind-qa
+          {
+            echo '# ScopeKind public QA'
+            date -u '+UTC: %Y-%m-%d %H:%M:%S'
+            TZ=America/Los_Angeles date '+Los Angeles: %Y-%m-%d %H:%M:%S %Z'
+            echo "Job status: $JOB_STATUS"
+            echo 'Target: https://scopekind.emmachataigner.workers.dev'
+            echo 'Desktop Chromium 1440x960 and mobile viewport 390x844.'
+            echo 'All production writes blocked. Signup success response is simulated: production database writes and email delivery NOT TESTED.'
+            echo 'Scripted functional checks and screenshots; no claim of exhaustive human UX review.'
+            echo 'Runs at 22:00 and 23:37 America/Los_Angeles. GitHub scheduling is best effort; the second run reduces, but cannot eliminate, missed-run risk.'
+          } | tee /tmp/scopekind-qa/RUN.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: scopekind-public-qa-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            /tmp/scopekind-qa/RUN.md
+            /tmp/scopekind-qa/results.json
+            /tmp/scopekind-qa/playwright-report/
+            /tmp/scopekind-qa/test-results/
+          retention-days: 30
+          if-no-files-found: error
