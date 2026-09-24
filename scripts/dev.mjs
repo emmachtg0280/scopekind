@@ -2,6 +2,8 @@ import http from "node:http";
 import { readFile, mkdir } from "node:fs/promises";
 import { DatabaseSync } from "node:sqlite";
 import worker from "../src/worker.js";
+import { buildWorkspace } from "./build-workspace.mjs";
+await buildWorkspace(".sites-runtime/workspace");
 const types = {
   html: "text/html",
   css: "text/css",
@@ -40,6 +42,25 @@ const DB = {
 const server = http.createServer(async (incoming, outgoing) => {
   try {
     const url = new URL(incoming.url, "http://localhost:4173");
+    const workspaceFiles = new Set([
+      "/workspace",
+      "/workspace/",
+      "/workspace.html",
+      "/workspace/workspace.js",
+      "/workspace/workspace.css",
+    ]);
+    if (workspaceFiles.has(url.pathname)) {
+      const file = url.pathname.startsWith("/workspace/workspace.")
+        ? url.pathname.slice(1)
+        : "workspace.html";
+      const content = await readFile(`.sites-runtime/workspace/${file}`);
+      outgoing.writeHead(200, {
+        "Content-Type": types[file.split(".").pop()],
+        "Cache-Control": "no-store",
+      });
+      outgoing.end(content);
+      return;
+    }
     if (url.pathname === "/api/pilot") {
       let body = "";
       for await (const chunk of incoming) {
@@ -77,6 +98,7 @@ const server = http.createServer(async (incoming, outgoing) => {
     outgoing.end("Internal server error");
   }
 });
-server.listen(4173, "127.0.0.1", () =>
-  console.log("Local: http://localhost:4173"),
+const port = Number(process.env.PORT || 4173);
+server.listen(port, "127.0.0.1", () =>
+  console.log(`Local: http://localhost:${port}`),
 );

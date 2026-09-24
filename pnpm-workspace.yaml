@@ -1,4 +1,6 @@
 allowBuilds:
+  '@astryxdesign/cli': true
+  '@astryxdesign/core': true
   esbuild: true
   workerd: true
 supportedArchitectures:
@@ -10,3 +12,6 @@ supportedArchitectures:
 minimumReleaseAgeExclude:
   - miniflare@5.20260910.0-alpha
   - wrangler@4.131.0
+  - '@astryxdesign/core@0.6.3'
+  - '@astryxdesign/theme-neutral@0.6.3'
+  - '@astryxdesign/cli@0.6.3'

@@ -5,14 +5,26 @@
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "build": "node scripts/build.mjs",
-    "lint": "node --check src/app.js && node --check src/worker.js && node --check scripts/dev.mjs",
+    "lint": "node --check src/app.js && node --check src/worker.js && node --check scripts/dev.mjs && node --check src/workspace/model.mjs && node --check src/workspace/theme.js && node --check scripts/build-workspace.mjs && node --check scripts/export-workspace.mjs",
     "test": "node --test tests/*.test.mjs",
     "preview:cloudflare": "wrangler dev",
     "deploy:check": "node scripts/build.mjs && wrangler deploy --dry-run",
-    "deploy": "node scripts/build.mjs && wrangler deploy"
+    "deploy": "node scripts/build.mjs && wrangler deploy",
+    "preview:export": "node scripts/export-workspace.mjs"
   },
   "devDependencies": {
+    "@astryxdesign/cli": "0.6.3",
+    "esbuild": "0.28.2",
     "prettier": "^3.9.6",
     "wrangler": "^4.131.0"
+  },
+  "dependencies": {
+    "@astryxdesign/core": "0.6.3",
+    "@astryxdesign/theme-neutral": "0.6.3",
+    "@fontsource/dm-sans": "5.3.0",
+    "@fontsource/space-grotesk": "5.3.0",
+    "@stylexjs/stylex": "0.19.1",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
   }
 }
