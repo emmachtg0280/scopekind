@@ -1,4 +1,21 @@
-# ScopeKind
+# Sestet
+
+Sestet est la nouvelle marque et le nouveau produit pour les consultants indépendants en stratégie et opérations. Le code actuel se trouve dans `product/` et `server/`. Les anciennes sources `src/` restent conservées pour le retour arrière et l’API historique.
+
+Voir [le guide de livraison et d’exploitation](docs/SESTET.md) et [le plan d’acquisition](docs/ACQUISITION.md).
+
+Site : https://sestet.emmachataigner.workers.dev
+
+**Démo publique ; comptes fermés.** La connexion, l’IA, les emails et la facturation test doivent encore être configurés et vérifiés avec les fournisseurs. Aucun encaissement réel n’est activé. Le dépôt GitHub est actuellement public.
+
+Développement : `pnpm run dev:api` puis `pnpm run dev:product`.
+Vérification : `pnpm test`, `pnpm run build:product`, `pnpm run deploy:product:check`.
+
+Les commandes `build` et `deploy` ci-dessous concernent **l’ancien site**. Pour Sestet, utiliser uniquement la configuration `wrangler.sestet.jsonc` décrite dans le guide.
+
+---
+
+## Archive — ancien positionnement ScopeKind
 
 ## Positionnement — septembre 2026
 

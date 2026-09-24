@@ -1,5 +1,5 @@
 {
-  "name": "scopekind",
+  "name": "sestet",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,10 +9,25 @@
     "test": "node --test tests/*.test.mjs",
     "preview:cloudflare": "wrangler dev",
     "deploy:check": "node scripts/build.mjs && wrangler deploy --dry-run",
-    "deploy": "node scripts/build.mjs && wrangler deploy"
+    "deploy": "node scripts/build.mjs && wrangler deploy",
+    "dev:product": "vite",
+    "dev:api": "node --watch scripts/app-dev.mjs --test-mail",
+    "build:product": "vite build && node scripts/build-resources.mjs",
+    "deploy:product:check": "vite build && node scripts/build-resources.mjs && wrangler deploy --config wrangler.sestet.jsonc --dry-run"
   },
   "devDependencies": {
+    "@astryxdesign/cli": "^0.6.2",
+    "@vitejs/plugin-react": "^6.1.1",
     "prettier": "^3.9.6",
+    "vite": "^8.3.0",
     "wrangler": "^4.131.0"
+  },
+  "dependencies": {
+    "@astryxdesign/core": "^0.6.2",
+    "@astryxdesign/theme-neutral": "^0.6.2",
+    "@stylexjs/stylex": "^0.19.1",
+    "pdfjs-dist": "^6.3.289",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
   }
 }
