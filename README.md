@@ -1,5 +1,39 @@
 # ScopeKind
 
+## Relais Codex — pivot consultants
+
+La base React/Astryx est disponible dans ce dépôt. Commencer par
+[les instructions de reprise](docs/CODEX_HANDOFF.md), puis lire
+[le cahier des charges complet](docs/ScopeKind_Prompt_Construction_Produit.md).
+La démonstration ci-dessous précède le pivot et ne constitue pas encore le SaaS
+avec authentification, génération IA et facturation.
+
+## Astryx client workspace preview
+
+Open `/workspace.html` (or `/workspace` on the local server) to explore the Poma
+client-feedback workspace. The landing page links to it. This is an isolated
+React 19 screen built with real Astryx 0.6.3 components: AppShell, SideNav,
+Stack/Grid, List/ListItem, TextArea, Button, Token, RadioList and Dialog.
+
+The ScopeKind theme extends Astryx Neutral with the existing royal blue, warm
+surfaces and rounded shapes. It supports light/dark modes and a mobile drawer.
+The existing native landing page, Worker, signup API and D1 schema stay intact.
+`pnpm run build` bundles the workspace with esbuild alongside the original assets;
+`pnpm run dev` builds it once at startup. Restart dev after workspace source edits.
+
+The Poma content is fictional. Editing and saving a draft, filtering requests,
+previewing a client question, recording simulated responses, exporting a Markdown
+summary and resetting the example are functional. Saved changes remain in this
+browser's local storage, with an in-memory fallback if storage is unavailable.
+Previous decision snapshots remain immutable; editing an approved request reopens
+that request. No inbox, live AI, authentication, real approval link, messaging or
+project backend is connected. The separate AI-engine prototype branch is not
+merged by this UI change.
+
+`pnpm run preview:export` generates a self-contained, offline HTML preview in
+`.sites-runtime/preview/ScopeKind_Astryx.html`. It can be opened without a server.
+This work is prepared on a separate branch and is not deployed automatically.
+
 ## Positionnement — septembre 2026
 
 ScopeKind cible d'abord les freelance brand et graphic designers : clarifier le retour, expliquer la recommandation, garder la raison avec la décision et convenir de l'impact avant une révision. Voir [POSITIONNEMENT.md](POSITIONNEMENT.md) pour les six branches, le périmètre priorisé, les limites et les hypothèses marché.
@@ -70,4 +104,3 @@ La version portable ne se met pas à jour automatiquement : voir la [documentati
 Voir [REFONTE.md](REFONTE.md) pour l’inspection, les références, les hypothèses et les priorités de connexion. Hero bleu roi, identité Poma développée, démo accessible sans compte, mémoire des décisions et travail supplémentaire, canaux à statuts explicites, bêta, FAQ. Les styles sont consolidés dans src/styles.css.
 
 Le formulaire demande seulement email et consentement. Après confirmation serveur, discipline et difficulté sont facultatives. Les anciennes colonnes D1 sont conservées, sans migration. La démo n’analyse rien avec une IA réelle et ne partage aucun checkpoint réel.
-
